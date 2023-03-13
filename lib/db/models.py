@@ -33,4 +33,4 @@ class Teacher(Base):
         return f'teacher first name: {self.first_name}, last name: {self.last_name}'
 
 
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)

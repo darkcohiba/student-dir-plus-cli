@@ -6,7 +6,7 @@ from models import Student, Teacher
 
 if __name__ == '__main__':
     
-    engine = create_engine('sqlite:///studentsNew.db')
+    engine = create_engine('sqlite:///studentDir.db')
     Session = sessionmaker(bind=engine)
     session = Session()
 
@@ -14,17 +14,16 @@ if __name__ == '__main__':
     # session.query(Student).delete()
     # session.query(Teacher).delete()
 
+    print("Seeding teachers...")
 
-    # sam = Teacher(
-    #     teacher_id = 1,
-    #     first_name = 'Sam',
-    #     last_name = 'Waters'
-    # )
+    sam = Teacher(
+        teacher_id = 1,
+        first_name = 'Sam',
+        last_name = 'Waters'
+    )
 
-    # session.add(sam)
+    session.add(sam)
     print("Seeding students...")
-
-    #
 
     chase = Student(
         student_id = 1,
