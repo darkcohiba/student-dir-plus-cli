@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///studentsNew.db')
+engine = create_engine('sqlite:///studentDir.db')
 
 Base = declarative_base()
 
