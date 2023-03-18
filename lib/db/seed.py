@@ -14,26 +14,45 @@ if __name__ == '__main__':
     # session.query(Student).delete()
     # session.query(Teacher).delete()
 
-    print("Seeding teachers...")
+    # print("Seeding teachers...")
 
-    sam = Teacher(
-        teacher_id = 1,
-        first_name = 'Sam',
-        last_name = 'Waters'
-    )
+    # sam = Teacher(
+    #     teacher_id = 1,
+    #     first_name = 'Sam',
+    #     last_name = 'Waters'
+    # )
+    
+    # stephen = Teacher(
+    #     teacher_id = 2,
+    #     first_name = 'Stephen',
+    #     last_name = 'Lamp'
+    # )
 
-    session.add(sam)
-    print("Seeding students...")
+    # teachers = [sam, stephen]
 
-    chase = Student(
-        student_id = 1,
-        first_name = 'Chase',
-        last_name = 'Walsh',
-        teacher_id = 1
-    )
+    # print("Seeding students...")
 
-    session.add(chase)
-    session.commit()
+    # chase = Student(
+    #     student_id = 1,
+    #     first_name = 'Chase',
+    #     last_name = 'Walsh',
+    #     teacher_id = sam
+    # )
+
+    # seth = Student(
+    #     student_id = 1,
+    #     first_name = 'Chase',
+    #     last_name = 'Walsh',
+    #     teacher_id = sam
+    # )
+
+    # students = [chase, seth]
+
+    # session.add_all(teachers)
+    # session.add_all(students)
+
+    # session.add(chase)
+    # session.commit()
 
     # print(session.query(Teacher).first)
 
