@@ -26,7 +26,10 @@ if __name__ == '__main__':
         last_name = input('What is your last name')
         create_new_teacher(first_name, last_name, id)
     elif entry_type == 's':
-        pass
+        students = session.query(Student).all()
+        id = int(len(students) + 1)
+        first_name = input('What is your first name')
+        last_name = input('What is your last name')
+        create_new_teacher(first_name, last_name, id)
 
-    
 
