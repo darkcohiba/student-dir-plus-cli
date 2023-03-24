@@ -15,8 +15,12 @@ def create_new_teacher(fname, lname, id):
     session.add(new_teacher)
     session.commit()
 
-def create_new_student(fname, lname, id):
+def create_new_student(fname, lname, teacher_id, student_id):
     new_student = Student(
+        student_id=student_id,
+        first_name=fname,
+        last_name=lname,
+        teacher_id=teacher_id.teacher_id,
     )
     session.add(new_student)
     session.commit()
@@ -24,22 +28,30 @@ def create_new_student(fname, lname, id):
 if __name__ == '__main__':
 
     print("Hello, welcome to our student and teacher database!")
-    entry_type = input("Are you entering a new student or teacher? (S/T): ").lower()
-    if entry_type == 't':
-        teachers = session.query(Teacher).all()
-        id = int(len(teachers) + 1)
-        first_name = input('What is your first name')
-        last_name = input('What is your last name')
-        create_new_teacher(first_name, last_name, id)
-    elif entry_type == 's':
-        students = session.query(Student).all()
-        id = int(len(students) + 1)
-        first_name = input('What is your first name')
-        last_name = input('What is your last name')
-        teacher_id = int(input("What is your teacher's id"))
-        teacher = session.query(Teacher).filter(Teacher.id == teacher_id).first()
-        print(teacher)
+    system_running = True
+    def add_student_or_teacher():
+        entry_type = input("Are you entering a new student or teacher? (S/T): ").lower()
+        if entry_type == 't':
+            print("Enter the teacher data below:")
+            teachers = session.query(Teacher).all()
+            id = int(len(teachers) + 1)
+            first_name = input('What is your first name: ')
+            last_name = input('What is your last name: ')
+            create_new_teacher(first_name, last_name, id)
+        elif entry_type == 's':
+            print("Enter the student data below:")
+            students = session.query(Student).all()
+            id = int(len(students) + 1)
+            first_name = input('What is your first name: ')
+            last_name = input('What is your last name: ')
+            students_teacher = input("What is your teacher's first name: ")
+            teacher = session.query(Teacher).filter(Teacher.first_name == students_teacher).first()
+            print(teacher)
+            create_new_student(first_name, last_name, teacher, id)  
 
-        # create_new_teacher(first_name, last_name, teacher_id, id)
-
-
+    while system_running:
+        print("These are the services we offer: \n 1. Adding Students/Teachers \n 2. Viewing Students/Teachers \n 3. Removing Students/Teachers \n")
+        option = int(input("Which service do you want, type the number that corresponds with the service: \n"))
+        if option == 1:
+            add_student_or_teacher()
+            print("Thank you for adding to our database!")
