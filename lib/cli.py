@@ -30,15 +30,15 @@ def add_student_or_teacher():
     entry_type = input("Are you entering a new student or teacher? (S/T): ").lower()
     if entry_type == 't':
         print("Enter the teacher data below:")
-        teachers = session.query(Teacher).all()
-        id = int(len(teachers) + 1)
+        teachers = list(session.query(Teacher).all())
+        id = int((str(teachers[-1]))[4]) + 1
         first_name = input('What is your first name: ')
         last_name = input('What is your last name: ')
         create_new_teacher(first_name, last_name, id)
     elif entry_type == 's':
         print("Enter the student data below:")
-        students = session.query(Student).all()
-        id = int(len(students) + 1)
+        students = list(session.query(Student).all())
+        id = int((str(students[-1]))[4]) + 1
         first_name = input('What is your first name: ')
         last_name = input('What is your last name: ')
         students_teacher = input("What is your teacher's first name: ")
@@ -48,8 +48,26 @@ def add_student_or_teacher():
 
 def remove_data():
     choice_type = input("Are you deleting a student or a teacher?  (student/teacher) : ").title()
-    data_name = input('What is the name of the ')
-    session.query(choice_type).filter(choice_type.first_name == data_name).first().delete()
+    if choice_type == 'student':
+        data_name = input(f'What is the first name of the {choice_type} you wish to remove: \n')
+        session.query(Student).filter(Student.first_name == data_name).delete()
+        session.commit()
+    elif choice_type == 'teacher':
+        data_name = input(f'What is the first name of the {choice_type} you wish to remove: \n')
+        session.query(Teacher).filter(Teacher.first_name == data_name).delete()
+        session.commit()
+
+def view_data():
+    choice_type = input("Do you want to view teachers or students? (student/teacher) : ").lower()
+    if choice_type == 'teacher':
+        teachers = session.query(Teacher).all()
+        for teacher in teachers:
+            print('{}, {} \n'.format(teacher.last_name, teacher.first_name))
+    elif choice_type == 'student':
+        students = session.query(Student).all()
+        for student in students:
+            print('{}, {}, id: {} \n'.format(student.last_name, student.first_name, student.student_id))
+
 
 
 if __name__ == '__main__':
@@ -62,6 +80,8 @@ if __name__ == '__main__':
         if option == 1:
             add_student_or_teacher()
             print("Thank you for adding to our database!")
+        elif option == 2:
+            view_data()
         elif option == 3:
             remove_data()
             print("Thank you for removing data from our database!")
