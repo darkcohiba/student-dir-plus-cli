@@ -15,6 +15,12 @@ def create_new_teacher(fname, lname, id):
     session.add(new_teacher)
     session.commit()
 
+def create_new_student(fname, lname, id):
+    new_student = Student(
+    )
+    session.add(new_student)
+    session.commit()
+
 if __name__ == '__main__':
 
     print("Hello, welcome to our student and teacher database!")
@@ -30,6 +36,10 @@ if __name__ == '__main__':
         id = int(len(students) + 1)
         first_name = input('What is your first name')
         last_name = input('What is your last name')
-        create_new_teacher(first_name, last_name, id)
+        teacher_id = int(input("What is your teacher's id"))
+        teacher = session.query(Teacher).filter(Teacher.id == teacher_id).first()
+        print(teacher)
+
+        # create_new_teacher(first_name, last_name, teacher_id, id)
 
 
