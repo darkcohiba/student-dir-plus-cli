@@ -66,7 +66,7 @@ def view_data():
     elif choice_type == 'student':
         students = session.query(Student).all()
         for student in students:
-            print('{}, {}, id: {} \n'.format(student.last_name, student.first_name, student.student_id))
+            print('\nlast name: {}, first name: {}, id: {} \n'.format(student.last_name, student.first_name, student.student_id))
 
 
 
@@ -75,14 +75,20 @@ if __name__ == '__main__':
     print("Hello, welcome to our student and teacher database!")
     system_running = True
     while system_running:
-        print("These are the services we offer: \n 1. Adding Students/Teachers \n 2. Viewing Students/Teachers \n 3. Removing Students/Teachers \n")
+        print("These are the services we offer: \n 1. Adding Students/Teachers \n 2. Viewing Students/Teachers \n 3. Removing Students/Teachers \n 4. Exit the program")
         option = int(input("Which service do you want, type the number that corresponds with the service: \n"))
         if option == 1:
             add_student_or_teacher()
             print("Thank you for adding to our database!")
         elif option == 2:
             view_data()
+            print("Thank you for viewing our database!")
         elif option == 3:
             remove_data()
             print("Thank you for removing data from our database!")
+        elif option == 4:
+            print("Thank you for using our program!")
+            system_running = False
+        else:
+            print("Please enter a valid service")
 
